@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router";
 import "./App.css";
 
 function App() {
@@ -12,9 +13,9 @@ function App() {
 
   return (
     <>
-      {cardsData.map((card) => (
-        <h2 key={card._id}>{card.name}</h2>
-      ))}
+      <h1>Header (navBar)!</h1>
+      <Outlet context={{ cardsData: cardsData }} />
+      <h2>This is footer</h2>
     </>
   );
 }
