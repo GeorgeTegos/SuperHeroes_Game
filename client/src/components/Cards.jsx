@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
+import styled from "styled-components";
+import Card from "./Card";
+
+const CardsWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+`;
 
 function Cards() {
   const { cardsData } = useOutletContext();
 
   return (
-    <div>
-      Cards!
-      {cardsData.map((card) => (
-        <>
-          <h2 key={card._id}>{card.name}</h2>
-          <h3>Power Stats</h3> <hr />
-          <ul>
-            <li>Intelligence: {card.powerstats.intelligence}</li>
-            <li>Strength: {card.powerstats.strength}</li>
-            <li>Speed: {card.powerstats.speed}</li>
-            <li>Durability: {card.powerstats.durability}</li>
-            <li>Power: {card.powerstats.power}</li>
-            <li>Combat: {card.powerstats.combat}</li>
-          </ul>
-        </>
-      ))}
-    </div>
+    <>
+      <h2> Cards! </h2>
+      <hr />
+      <CardsWrapper>
+        {cardsData.map((card) => (
+          <Card key={card._id} card={card} />
+        ))}
+      </CardsWrapper>
+    </>
   );
 }
 
