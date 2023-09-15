@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Outlet } from "react-router";
 import "./App.css";
 
@@ -13,7 +14,14 @@ function App() {
 
   return (
     <>
-      <h1>Header (navBar)!</h1>
+      <li>
+        <Link to='/'>Home</Link>
+      </li>
+      <li>
+        <Link to='/cards'>Cards</Link>
+      </li>
+
+
       <Outlet context={{ cardsData: cardsData }} />
       <h2>This is footer</h2>
     </>
