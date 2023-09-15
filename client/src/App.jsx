@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router";
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   const [cardsData, setCardsData] = useState([]);
@@ -14,13 +15,7 @@ function App() {
 
   return (
     <>
-      <li>
-        <Link to='/'>Home</Link>
-      </li>
-      <li>
-        <Link to='/cards'>Cards</Link>
-      </li>
-
+      <Header />
 
       <Outlet context={{ cardsData: cardsData }} />
       <h2>This is footer</h2>
