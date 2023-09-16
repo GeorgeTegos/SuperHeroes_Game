@@ -14,12 +14,9 @@ function App() {
 
   return (
     <>
-      <div className="test">
-        <Header />
-      </div>
+      <Header />
 
       <Outlet context={{ cardsData: cardsData }} />
-      <h2>This is footer</h2>
     </>
   );
 }

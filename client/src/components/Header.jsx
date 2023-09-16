@@ -1,25 +1,58 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../styles/NavStyle.css";
 
-const HeaderWrapper = styled.div`
+const Banner = styled.div`
   background-color: green;
 `;
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const newRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  });
+
+  const handleOutsideClick = (e) => {
+    if (newRef.current && !newRef.current.contains(e.target)) {
+      document.getElementById("menu-bar").classList.remove("change");
+      document.getElementById("nav").classList.remove("change");
+      document.getElementById("menu-bg").classList.remove("change-bg");
+      setMenuOpen(false);
+    }
+  };
+
   function menuOnClick() {
-    document.getElementById("menu-bar").classList.toggle("change");
-    document.getElementById("nav").classList.toggle("change");
-    document.getElementById("menu-bg").classList.toggle("change-bg");
+    if (menuOpen == false) {
+      document.getElementById("menu-bar").classList.toggle("change");
+      document.getElementById("nav").classList.toggle("change");
+      document.getElementById("menu-bg").classList.toggle("change-bg");
+      setMenuOpen(true);
+    } else {
+      document.getElementById("menu-bar").classList.remove("change");
+      document.getElementById("nav").classList.remove("change");
+      document.getElementById("menu-bg").classList.remove("change-bg");
+      setMenuOpen(false);
+    }
   }
+  console.log(menuOpen);
 
   return (
     <>
+      <Banner>
+        Something Here <hr />
+      </Banner>
       <div id="menu">
+        {/* <div id="menu" ref={newRef}>  */}
         <div
           id="menu-bar"
           onClick={menuOnClick}
+          ref={newRef}
         >
           <div
             id="bar1"
@@ -57,7 +90,6 @@ function Header() {
           </ul>
         </nav>
       </div>
-
       <div
         className="menu-bg"
         id="menu-bg"
