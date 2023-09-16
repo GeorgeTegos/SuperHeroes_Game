@@ -6,7 +6,8 @@ import Card from "./Card";
 const CardsWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
 `;
 
 function Cards() {
@@ -18,7 +19,10 @@ function Cards() {
       <hr />
       <CardsWrapper>
         {cardsData.map((card) => (
-          <Card key={card._id} card={card} />
+          <Card
+            key={card._id}
+            card={card}
+          />
         ))}
       </CardsWrapper>
     </>

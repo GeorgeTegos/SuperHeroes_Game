@@ -5,23 +5,23 @@ import dc from "../images/dc-symbol.png";
 import "../../src/App.css";
 
 const CardStyle = styled.div`
-  border: 1px solid black;
-  color: white;
-  background-color: green;
-  border: 10px solid red;
+  color: White;
+  background-color: ${(props) => props.$background && `${props.$background}`};
+  border: 7px solid ${(props) => props.$border && `${props.$border}`};
   border-radius: 20px;
-  /* background: ${(props) =>
-    props.$background ? `url(${props.$background}) center/cover` : "white"}; */
+  box-shadow: 0px 0px 1px 3px gold;
 `;
 
 const Image = styled.div`
   background: ${(props) =>
     props.$background ? `url(${props.$background}) center/cover` : "white"};
-  min-height: 26rem;
-  min-width: 20rem;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
+  min-height: 30rem;
+  min-width: 22rem;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 const StatsUl = styled.ul`
@@ -34,7 +34,9 @@ const StatsUl = styled.ul`
 const CardHeader = styled.div`
   display: flex;
   padding: 3px;
+  font-family: "Times New Roman", Times, serif;
   align-items: center;
+  border-bottom: 5px solid ${(props) => props.$border && `${props.$border}`};
 `;
 
 const CardStat = styled.li`
@@ -53,14 +55,33 @@ const CardStat = styled.li`
   }
 `;
 
+const TotalCardPowerStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: beige;
+  color: black;
+  border-radius: 10px;
+  padding: 2px;
+  margin-left: 0.5rem;
+  margin-bottom: 0.3rem;
+  min-height: 2.5rem;
+`;
+
 function Card({ card }) {
+  let totalCardPower = 0;
+  Object.entries(card.powerstats).map(([key, value]) => {
+    totalCardPower += Number(value);
+  });
+
   return (
     <>
       <CardStyle
         key={card._id}
-        $background={card.image.url}
+        $background={card.universe == "Marvel" ? "#AA0000" : "#00308F"}
+        $border={card.universe == "Marvel" ? "#00308F" : "#AA0000"}
       >
-        <CardHeader>
+        <CardHeader $border={card.universe == "Marvel" ? "#00308F" : "#AA0000"}>
           <h2 style={{ marginRight: "auto", paddingLeft: "20px" }}>
             {card.name}
           </h2>
@@ -71,6 +92,10 @@ function Card({ card }) {
           />
         </CardHeader>
         <Image $background={card.image.url}>
+          <TotalCardPowerStyle>
+            <div>Total Power</div>
+            <div>{totalCardPower}</div>
+          </TotalCardPowerStyle>
           <StatsUl>
             <CardStat key="int">
               Intelligence: {card.powerstats.intelligence}
