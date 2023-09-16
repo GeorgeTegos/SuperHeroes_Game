@@ -40,7 +40,17 @@ const CardHeader = styled.div`
 const CardStat = styled.li`
   background-color: beige;
   color: black;
-  padding: 3px 7px 3px 7px;
+  margin-right: 5px;
+  min-width: 8rem;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid black;
+  box-shadow: 4px 2px 5px 1px white;
+  border-radius: 20px;
+  &:hover {
+    box-shadow: 0px 0px 20px 20px white;
+    cursor: pointer;
+    font-weight: bold;
+  }
 `;
 
 function Card({ card }) {
