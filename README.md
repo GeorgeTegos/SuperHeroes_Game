@@ -3,10 +3,10 @@ This Project is a Trump Card game based on Marvel and DC comics universe
 
 To run this App you will need to
 
-```cd server
-npm install```
+``` cd server
+npm install ```
 
-```cd client
+``` cd client
 npm install ```
 
 A local mongodb compass database
