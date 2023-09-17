@@ -1,25 +1,42 @@
 # SuperHeroes_Game
-This Project is a Trump Card game based on Marvel and DC comics universe
 
-To run this App you will need to
+This Project is a Trump Card game based on Marvel and DC comics universe.
+Project is still in progress.
 
-``` cd server
-npm install ```
-
-``` cd client
-npm install ```
-
+To run this App you will need to have
 A local mongodb compass database
-  Create a new database named " trump_card "
-  and a new collection name " cards "
-  then load the json file into this collection
+Connect to your mongodb (mongodb://localhost:27017)
 
+For the root folder follow those commands:
 
-Open a new terminal , go to folder server and type
-``` npm run dev ```
+```
+cd client
+npm install
+```
 
-Open a new terminal , go to folder client and type
-``` npm run dev ```
+```
+cd ../server
+npm install
+```
 
-You can then access the page by brower visiting the url
+```
+npm run seeds
+cd ..
+```
+
+Open a new terminal from the root folder
+
+```
+cd server
+npm run dev
+```
+
+Open a new terminal from the root folder
+
+```
+cd client
+npm run dev
+```
+
+You can then access the page by browser visiting the url
 http://localhost:5173/
