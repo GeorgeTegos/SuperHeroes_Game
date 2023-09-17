@@ -5,6 +5,8 @@ import "../styles/NavStyle.css";
 
 const Banner = styled.div`
   background-color: green;
+  margin-left: 30px;
+  margin-top: -1.5rem;
 `;
 
 function Header() {
