@@ -1,10 +1,10 @@
 # SuperHeroes_Game
 
 This Project is a Trump Card game based on Marvel and DC comics universe.
-Project is still in progress.
+The Project is still in progress.
 
 To run this App you will need to have
-A local mongodb compass database
+a local mongodb compass database
 Connect to your mongodb (mongodb://localhost:27017)
 
 For the root folder follow those commands:
@@ -38,5 +38,5 @@ cd client
 npm run dev
 ```
 
-You can then access the page by browser visiting the url
+You can then access the page by browser, visiting the url
 http://localhost:5173/
