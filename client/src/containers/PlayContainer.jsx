@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import styled from "styled-components";
+import Card from "../components/Card";
 
 const BattleGroundWrapper = styled.div`
   margin-top: 1.5rem;
@@ -15,7 +16,7 @@ const BattleGroundHeader = styled.div`
   border: 1px solid red;
 `;
 
-const PlayerOne = styled.div`
+const PlayerOneInfo = styled.div`
   display: flex;
   width: 30%;
   justify-content: space-around;
@@ -26,7 +27,7 @@ const Rounds = styled.div`
   font-weight: bolder;
 `;
 
-const PlayerTwo = styled.div`
+const PlayerTwoInfo = styled.div`
   display: flex;
   font-weight: bold;
 
@@ -38,6 +39,9 @@ function PlayContainer() {
   const { cardsData } = useOutletContext();
   const [deckOne, setDeckOne] = useState([]);
   const [deckTwo, setDeckTwo] = useState([]);
+  const [playerOneCard, setPlayerOneCard] = useState();
+  const [playerTwoCard, setPlayerTwoCard] = useState();
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleCardsSplitIntoDeck = (deckToCreate) => {
     const newDeck = [];
@@ -57,45 +61,108 @@ function PlayContainer() {
     }
   };
 
+  const handleCardPerRound = () => {
+    const giveACard = (deck) => {
+      const getRandomNumber = Math.floor(Math.random() * deck.length);
+      const selectedCard = deck[getRandomNumber];
+      return selectedCard;
+    };
+    setPlayerOneCard(giveACard(deckOne));
+    setPlayerTwoCard(giveACard(deckTwo));
+  };
+
+  const startGame = () => {
+    handleCardsSplitIntoDeck("1");
+    handleCardsSplitIntoDeck("2");
+    setGameStarted(true);
+  };
+
   return (
     <>
-      <div>
-        {deckOne.length == 0 && (
-          <button
-            onClick={(e) => {
-              handleCardsSplitIntoDeck(e.target.value);
-            }}
-            value="1"
-          >
-            Create Deck One
-          </button>
-        )}
-
-        {deckTwo.length == 0 && (
-          <button
-            onClick={(e) => {
-              handleCardsSplitIntoDeck(e.target.value);
-            }}
-            value="2"
-          >
-            Create Deck Two
-          </button>
-        )}
-      </div>
       <BattleGroundWrapper>
         <BattleGroundHeader>
-          <PlayerOne>
+          <PlayerOneInfo>
             <div>Player One</div> <div>Cards: 10</div> <div>Your Round</div>
-          </PlayerOne>
-          <Rounds>Round X</Rounds>
-          <PlayerTwo>
+            <div>
+              {/* {deckOne.length == 0 && (
+                <button
+                  onClick={(e) => {
+                    handleCardsSplitIntoDeck(e.target.value);
+                  }}
+                  value="1"
+                >
+                  Create Deck One
+                </button>
+              )} */}
+            </div>
+          </PlayerOneInfo>
+          <Rounds>
+            {gameStarted == true ? (
+              <span>Round X</span>
+            ) : (
+              <button onClick={startGame}>Start</button>
+            )}
+          </Rounds>
+          <PlayerTwoInfo>
+            <div>
+              {/* {deckTwo.length == 0 && (
+                <button
+                  onClick={(e) => {
+                    handleCardsSplitIntoDeck(e.target.value);
+                  }}
+                  value="2"
+                >
+                  Create Deck Two
+                </button>
+              )} */}
+            </div>
             <div>Enemy's Round</div>
             <div>Cards: 10</div> <div>Player Two</div>
-          </PlayerTwo>
+          </PlayerTwoInfo>
         </BattleGroundHeader>
+        <BattleGround>
+          <PlayerOne>
+            {/* {deckOne.length > 0 && handleCardSelect()} */}
+            {playerOneCard && (
+              <Card
+                key={playerOneCard._id}
+                card={playerOneCard}
+              />
+            )}
+          </PlayerOne>
+          <div>
+            <button onClick={handleCardPerRound}>New Round</button>
+          </div>
+          <PlayerTwo>
+            {playerTwoCard && (
+              <Card
+                key={playerTwoCard._id}
+                card={playerTwoCard}
+              />
+            )}
+          </PlayerTwo>
+        </BattleGround>
       </BattleGroundWrapper>
     </>
   );
 }
 
 export default PlayContainer;
+
+const BattleGround = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid yellow;
+  justify-content: space-between;
+`;
+
+const PlayerOne = styled.div`
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  padding: 5px;
+`;
+
+const PlayerTwo = styled.div`
+  padding: 5px;
+`;
