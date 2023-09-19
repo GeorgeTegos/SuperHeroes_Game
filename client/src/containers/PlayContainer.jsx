@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import styled from "styled-components";
 import Card from "../components/Card";
@@ -61,16 +61,31 @@ function PlayContainer() {
   const handleCardSelect = () => {
     const getRandomNumber = Math.floor(Math.random() * deckOne.length);
     const selectedCard = deckOne[getRandomNumber];
-    console.log(deckOne[getRandomNumber]);
-
-    return (
-      <Card
-        key={selectedCard._id}
-        card={selectedCard}
-      />
-    );
+    setPlayerOneCard(selectedCard);
   };
 
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const handleCardPerRound = () => {
+    const giveACard = (deck) => {
+      const getRandomNumber = Math.floor(Math.random() * deck.length);
+      const selectedCard = deck[getRandomNumber];
+      return selectedCard;
+    };
+    setPlayerOneCard(giveACard(deckOne));
+    setPlayerTwoCard(giveACard(deckTwo));
+  };
+
+  // const startGame = () => {
+  //   useEffect(() => {
+  //     handleCardsSplitIntoDeck("1");
+  //     handleCardsSplitIntoDeck("2");
+  //     console.log("Test");
+  //   }, []);
+  // };
+
+  const [playerOneCard, setPlayerOneCard] = useState();
+  const [playerTwoCard, setPlayerTwoCard] = useState();
   return (
     <>
       <BattleGroundWrapper>
@@ -90,7 +105,10 @@ function PlayContainer() {
               )}
             </div>
           </PlayerOneInfo>
-          <Rounds>Round X</Rounds>
+          <Rounds>
+            Round X <br />
+            {/* <button onClick={startGame}>Start</button> */}
+          </Rounds>
           <PlayerTwoInfo>
             <div>
               {deckTwo.length == 0 && (
@@ -109,15 +127,25 @@ function PlayContainer() {
           </PlayerTwoInfo>
         </BattleGroundHeader>
         <BattleGround>
-          <PlayerOne>{deckOne.length > 0 && handleCardSelect()}</PlayerOne>
-          <div>Center</div>
-          <PlayerTwo>
-            {deckTwo.map((card) => (
+          <PlayerOne>
+            {/* {deckOne.length > 0 && handleCardSelect()} */}
+            {playerOneCard && (
               <Card
-                key={card._id}
-                card={card}
+                key={playerOneCard._id}
+                card={playerOneCard}
               />
-            ))}
+            )}
+          </PlayerOne>
+          <div>
+            <button onClick={handleCardPerRound}>New Round</button>
+          </div>
+          <PlayerTwo>
+            {playerTwoCard && (
+              <Card
+                key={playerTwoCard._id}
+                card={playerTwoCard}
+              />
+            )}
           </PlayerTwo>
         </BattleGround>
       </BattleGroundWrapper>
