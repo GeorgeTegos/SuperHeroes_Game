@@ -39,6 +39,9 @@ function PlayContainer() {
   const { cardsData } = useOutletContext();
   const [deckOne, setDeckOne] = useState([]);
   const [deckTwo, setDeckTwo] = useState([]);
+  const [playerOneCard, setPlayerOneCard] = useState();
+  const [playerTwoCard, setPlayerTwoCard] = useState();
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleCardsSplitIntoDeck = (deckToCreate) => {
     const newDeck = [];
@@ -58,14 +61,6 @@ function PlayContainer() {
     }
   };
 
-  const handleCardSelect = () => {
-    const getRandomNumber = Math.floor(Math.random() * deckOne.length);
-    const selectedCard = deckOne[getRandomNumber];
-    setPlayerOneCard(selectedCard);
-  };
-
-  const [gameStarted, setGameStarted] = useState(false);
-
   const handleCardPerRound = () => {
     const giveACard = (deck) => {
       const getRandomNumber = Math.floor(Math.random() * deck.length);
@@ -76,16 +71,12 @@ function PlayContainer() {
     setPlayerTwoCard(giveACard(deckTwo));
   };
 
-  // const startGame = () => {
-  //   useEffect(() => {
-  //     handleCardsSplitIntoDeck("1");
-  //     handleCardsSplitIntoDeck("2");
-  //     console.log("Test");
-  //   }, []);
-  // };
+  const startGame = () => {
+    handleCardsSplitIntoDeck("1");
+    handleCardsSplitIntoDeck("2");
+    setGameStarted(true);
+  };
 
-  const [playerOneCard, setPlayerOneCard] = useState();
-  const [playerTwoCard, setPlayerTwoCard] = useState();
   return (
     <>
       <BattleGroundWrapper>
@@ -93,7 +84,7 @@ function PlayContainer() {
           <PlayerOneInfo>
             <div>Player One</div> <div>Cards: 10</div> <div>Your Round</div>
             <div>
-              {deckOne.length == 0 && (
+              {/* {deckOne.length == 0 && (
                 <button
                   onClick={(e) => {
                     handleCardsSplitIntoDeck(e.target.value);
@@ -102,16 +93,19 @@ function PlayContainer() {
                 >
                   Create Deck One
                 </button>
-              )}
+              )} */}
             </div>
           </PlayerOneInfo>
           <Rounds>
-            Round X <br />
-            {/* <button onClick={startGame}>Start</button> */}
+            {gameStarted == true ? (
+              <span>Round X</span>
+            ) : (
+              <button onClick={startGame}>Start</button>
+            )}
           </Rounds>
           <PlayerTwoInfo>
             <div>
-              {deckTwo.length == 0 && (
+              {/* {deckTwo.length == 0 && (
                 <button
                   onClick={(e) => {
                     handleCardsSplitIntoDeck(e.target.value);
@@ -120,7 +114,7 @@ function PlayContainer() {
                 >
                   Create Deck Two
                 </button>
-              )}
+              )} */}
             </div>
             <div>Enemy's Round</div>
             <div>Cards: 10</div> <div>Player Two</div>
