@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import styled from "styled-components";
 import Card from "../components/Card";
+// import BattleGroundWrapper from "../styles/PlayStyle";
 
 const BattleGroundWrapper = styled.div`
   margin-top: 1.5rem;
@@ -83,18 +84,6 @@ function PlayContainer() {
         <BattleGroundHeader>
           <PlayerOneInfo>
             <div>Player One</div> <div>Cards: 10</div> <div>Your Round</div>
-            <div>
-              {/* {deckOne.length == 0 && (
-                <button
-                  onClick={(e) => {
-                    handleCardsSplitIntoDeck(e.target.value);
-                  }}
-                  value="1"
-                >
-                  Create Deck One
-                </button>
-              )} */}
-            </div>
           </PlayerOneInfo>
           <Rounds>
             {gameStarted == true ? (
@@ -104,25 +93,12 @@ function PlayContainer() {
             )}
           </Rounds>
           <PlayerTwoInfo>
-            <div>
-              {/* {deckTwo.length == 0 && (
-                <button
-                  onClick={(e) => {
-                    handleCardsSplitIntoDeck(e.target.value);
-                  }}
-                  value="2"
-                >
-                  Create Deck Two
-                </button>
-              )} */}
-            </div>
-            <div>Enemy's Round</div>
+            <div>Player Two</div>
             <div>Cards: 10</div> <div>Player Two</div>
           </PlayerTwoInfo>
         </BattleGroundHeader>
         <BattleGround>
           <PlayerOne>
-            {/* {deckOne.length > 0 && handleCardSelect()} */}
             {playerOneCard && (
               <Card
                 key={playerOneCard._id}
@@ -130,9 +106,11 @@ function PlayContainer() {
               />
             )}
           </PlayerOne>
-          <div>
-            <button onClick={handleCardPerRound}>New Round</button>
-          </div>
+          {gameStarted == true && (
+            <div>
+              <button onClick={handleCardPerRound}>New Round</button>
+            </div>
+          )}
           <PlayerTwo>
             {playerTwoCard && (
               <Card
@@ -152,7 +130,6 @@ export default PlayContainer;
 const BattleGround = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border: 1px solid yellow;
   justify-content: space-between;
 `;
 
