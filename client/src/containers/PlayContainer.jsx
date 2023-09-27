@@ -78,6 +78,22 @@ function PlayContainer() {
     setGameStarted(true);
   };
 
+  const handlePickOption = (e) => {
+    console.log(e.target.value);
+
+    // handleComparison(playerOneCard, playerTwoCard);
+  };
+
+  const handleComparison = (playerOneSelectedCard, playerTwoSelectedCard) => {
+    if (playerOneCard > playerTwoCard) {
+      console.log("player 1");
+    } else if (playerOneCard < playerTwoCard) {
+      console.log("player 2");
+    } else {
+      console.log("tie");
+    }
+  };
+
   return (
     <>
       <BattleGroundWrapper>
@@ -103,6 +119,7 @@ function PlayContainer() {
               <Card
                 key={playerOneCard._id}
                 card={playerOneCard}
+                handlePickOption={handlePickOption}
               />
             )}
           </PlayerOne>
@@ -116,6 +133,7 @@ function PlayContainer() {
               <Card
                 key={playerTwoCard._id}
                 card={playerTwoCard}
+                handlePickOption={handlePickOption}
               />
             )}
           </PlayerTwo>

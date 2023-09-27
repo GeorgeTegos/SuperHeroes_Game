@@ -68,11 +68,15 @@ const TotalCardPowerStyle = styled.div`
   min-height: 2.5rem;
 `;
 
-function Card({ card }) {
+function Card({ card, handlePickOption }) {
   let totalCardPower = 0;
   Object.entries(card.powerstats).map(([key, value]) => {
     totalCardPower += Number(value);
   });
+
+  // const handlePickOption = (e) => {
+  //   console.log(e.target.value);
+  // };
 
   return (
     <>
@@ -97,16 +101,48 @@ function Card({ card }) {
             <div>{totalCardPower}</div>
           </TotalCardPowerStyle>
           <StatsUl>
-            <CardStat key="int">
+            <CardStat
+              key="int"
+              onClick={handlePickOption}
+              value={card.powerstats.value}
+            >
               Intelligence: {card.powerstats.intelligence}
             </CardStat>
-            <CardStat key="str">Strength: {card.powerstats.strength}</CardStat>
-            <CardStat key="speed">Speed: {card.powerstats.speed}</CardStat>
-            <CardStat key="durability">
+            <CardStat
+              key="str"
+              onClick={handlePickOption}
+              value={card.powerstats.strength}
+            >
+              Strength: {card.powerstats.strength}
+            </CardStat>
+            <CardStat
+              key="speed"
+              onClick={handlePickOption}
+              value={card.powerstats.speed}
+            >
+              Speed: {card.powerstats.speed}
+            </CardStat>
+            <CardStat
+              key="durability"
+              onClick={handlePickOption}
+              value={card.powerstats.durability}
+            >
               Durability: {card.powerstats.durability}
             </CardStat>
-            <CardStat key="power">Power: {card.powerstats.power}</CardStat>
-            <CardStat key="combat">Combat: {card.powerstats.combat}</CardStat>
+            <CardStat
+              key="power"
+              onClick={handlePickOption}
+              value={card.powerstats.power}
+            >
+              Power: {card.powerstats.power}
+            </CardStat>
+            <CardStat
+              key="combat"
+              onClick={handlePickOption}
+              value={card.powerstats.combat}
+            >
+              Combat: {card.powerstats.combat}
+            </CardStat>
           </StatsUl>
         </Image>
       </CardStyle>
