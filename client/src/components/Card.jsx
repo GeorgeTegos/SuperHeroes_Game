@@ -103,42 +103,42 @@ function Card({ card, handlePickOption }) {
           <StatsUl>
             <CardStat
               key="int"
-              onClick={handlePickOption}
-              value={card.powerstats.value}
+              onClick={(e) => handlePickOption(e.target.value, card)}
+              value={card.powerstats.intelligence}
             >
               Intelligence: {card.powerstats.intelligence}
             </CardStat>
             <CardStat
               key="str"
-              onClick={handlePickOption}
+              onClick={(e) => handlePickOption(e.target.value, card)}
               value={card.powerstats.strength}
             >
               Strength: {card.powerstats.strength}
             </CardStat>
             <CardStat
               key="speed"
-              onClick={handlePickOption}
+              onClick={(e) => handlePickOption(e.target.value, card)}
               value={card.powerstats.speed}
             >
               Speed: {card.powerstats.speed}
             </CardStat>
             <CardStat
               key="durability"
-              onClick={handlePickOption}
+              onClick={(e) => handlePickOption(e.target.value, card)}
               value={card.powerstats.durability}
             >
               Durability: {card.powerstats.durability}
             </CardStat>
             <CardStat
               key="power"
-              onClick={handlePickOption}
+              onClick={(e) => handlePickOption(e.target.value, card)}
               value={card.powerstats.power}
             >
               Power: {card.powerstats.power}
             </CardStat>
             <CardStat
               key="combat"
-              onClick={handlePickOption}
+              onClick={(e) => handlePickOption(e.target.value, card)}
               value={card.powerstats.combat}
             >
               Combat: {card.powerstats.combat}
