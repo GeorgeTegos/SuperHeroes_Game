@@ -78,9 +78,11 @@ function PlayContainer() {
     setGameStarted(true);
   };
 
-  const handlePickOption = (value, card) => {
-    console.log(value);
+  const handlePickOption = (card, key) => {
     console.log(card);
+    console.log(key);
+    let x = card;
+    console.log(key in x);
 
     // handleComparison(playerOneCard, playerTwoCard);
   };

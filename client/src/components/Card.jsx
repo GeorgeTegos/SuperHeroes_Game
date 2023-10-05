@@ -103,42 +103,42 @@ function Card({ card, handlePickOption }) {
           <StatsUl>
             <CardStat
               key="int"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "intelligence")}
               value={card.powerstats.intelligence}
             >
               Intelligence: {card.powerstats.intelligence}
             </CardStat>
             <CardStat
               key="str"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "strength")}
               value={card.powerstats.strength}
             >
               Strength: {card.powerstats.strength}
             </CardStat>
             <CardStat
               key="speed"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "speed")}
               value={card.powerstats.speed}
             >
               Speed: {card.powerstats.speed}
             </CardStat>
             <CardStat
               key="durability"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "durability")}
               value={card.powerstats.durability}
             >
               Durability: {card.powerstats.durability}
             </CardStat>
             <CardStat
               key="power"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "power")}
               value={card.powerstats.power}
             >
               Power: {card.powerstats.power}
             </CardStat>
             <CardStat
               key="combat"
-              onClick={(e) => handlePickOption(e.target.value, card)}
+              onClick={(e) => handlePickOption(card.powerstats, "combat")}
               value={card.powerstats.combat}
             >
               Combat: {card.powerstats.combat}
